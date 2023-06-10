@@ -1,6 +1,17 @@
 const shortid = require("shortid");
 const URL = require("../models/url");
 
+async function handleGetAllURLs(req, res) {
+  try {
+    const urls = await URL.find()
+      .sort({ "visitHistory.length": -1 })
+      .limit(100);
+    return res.json({ urls });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+
 async function handleGenerateNewShortURL(req, res) {
   const body = req.body;
   if (!body.url) return res.status(400).json({ error: "url is required" });
@@ -27,4 +38,5 @@ async function handleGetAnalytics(req, res) {
 module.exports = {
   handleGenerateNewShortURL,
   handleGetAnalytics,
+  handleGetAllURLs
 };
