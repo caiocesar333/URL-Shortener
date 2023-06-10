@@ -7,10 +7,19 @@ const userSchema = new mongoose.Schema(
             required: true,
             unique: true,
         },
-        password :{
+        password: {
             type: String,
-            required: true 
-        }
+            required: true
+        },
+        session: {
+            type: Boolean,
+            default: false,
+        },
+        storedLinks: [{
+            link: {
+                type: String
+            }
+        }]
     }
 )
 

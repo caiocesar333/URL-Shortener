@@ -13,9 +13,8 @@ connectDB()
 
 app.use(express.json());
 
+// url
 app.use("/url", urlRoute);
-app.use("/user", userRoute);
-
 app.get("/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
   const entry = await URL.findOneAndUpdate(
@@ -33,7 +32,9 @@ app.get("/:shortId", async (req, res) => {
   res.redirect(entry.redirectURL);
 });
 
-//user
+//user 
+app.use("/user", userRoute);
+
 
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
