@@ -73,8 +73,41 @@ async function handleUserSession(req, res) {
         return res.status(400).json({ error: "An error occurred" });
     }
 }
+
+async function handleDeleteUserLink(req, res) {
+    const body = req.body;
+    try {
+      const user = await User.findOne({ userName: body.userName });
+      console.log(user);
+      if (!user) {
+        return res.status(400).json({ error: "User not found" });
+      }
+  
+      if (!user.session) {
+        return res.status(401).json({ error: "User not logged in" });
+      }
+  
+      await User.findOneAndUpdate(
+        { userName: body.userName },
+        {
+          $pull: {
+            storedLinks: {
+              link: body.url,
+            },
+          },
+        }
+      );
+
+      return res.json({ message: "Link deleted successfully" });
+    } catch (error) {
+      return res.status(400).json({ error: "An error occurred" });
+    }
+  }
+  
+
 module.exports = {
     handleCreateNewUser,
     handleLoginUser,
-    handleUserSession
+    handleUserSession,
+    handleDeleteUserLink
 };
