@@ -15,6 +15,7 @@
 import { ref } from 'vue';
 import axios from 'axios'
 import ShortenNowButton from './ShortenNowButton.vue';
+import LinkIcon from './LinkIcon.vue';
 
 const inputUrl = ref('');
 const shortId = ref('');
