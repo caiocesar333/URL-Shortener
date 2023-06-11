@@ -9,7 +9,7 @@ const {
 const router = express.Router();
 
 router.post("/", handleCreateNewUser);
-router.get("/login", handleLoginUser);
+router.post("/login", handleLoginUser);
 
 router.get("/links",handleUserSession )
 router.delete("/links",handleDeleteUserLink )
