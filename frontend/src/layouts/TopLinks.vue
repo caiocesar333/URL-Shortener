@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-col">
+        <h1 class="font-bold text-7xl text-blue-600 mb-28">Top 100 Links! </h1>
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div class="overflow-hidden">
