@@ -3,6 +3,7 @@ const {
   handleCreateNewUser,
   handleLoginUser,
   handleUserSession,
+  handleGetUserLinks,
   handleDeleteUserLink
 } = require("../controllers/user");
 
@@ -12,6 +13,8 @@ router.post("/", handleCreateNewUser);
 router.post("/login", handleLoginUser);
 
 router.post("/links",handleUserSession )
+
+router.post("/yourLinks",handleGetUserLinks )
 router.delete("/links",handleDeleteUserLink )
 
 

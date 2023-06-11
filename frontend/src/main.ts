@@ -8,6 +8,8 @@ import Login from './layouts/Login.vue'
 import SignUp from './layouts/SignUp.vue'
 import TopLinks from './layouts/TopLinks.vue'
 import HomeLoggedVue from './layouts/HomeLogged.vue'
+import TopLinksLoggedVue from './layouts/TopLinksLogged.vue'
+TopLinksLoggedVue
 
 const routes = [
   {
@@ -29,6 +31,10 @@ const routes = [
   {
     path: '/HomeLogged/:userName',
     component: HomeLoggedVue
+  },
+  {
+    path: '/yourLinks/:userName',
+    component: TopLinksLoggedVue
   },
 ];
 
