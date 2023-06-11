@@ -1,5 +1,6 @@
 <template class="h-screen">
   <div class="h-full">
+    <h1 class="font-bold text-7xl text-blue-600">Log In!</h1>
     <!-- Left column container with background-->
     <div
       class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between"
