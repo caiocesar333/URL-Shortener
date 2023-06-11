@@ -7,6 +7,7 @@ import Home from './layouts/Home.vue'
 import Login from './layouts/Login.vue'
 import SignUp from './layouts/SignUp.vue'
 import TopLinks from './layouts/TopLinks.vue'
+import HomeLoggedVue from './layouts/HomeLogged.vue'
 
 const routes = [
   {
@@ -24,6 +25,10 @@ const routes = [
   {
     path: '/topLinks',
     component: TopLinks
+  },
+  {
+    path: '/HomeLogged',
+    component: HomeLoggedVue
   },
 ];
 
