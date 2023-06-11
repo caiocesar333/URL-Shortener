@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LinkInput from "../components/LinkInput.vue";
+import UserLinkInput from "../components/UserLinkInput.vue";
 import Menu from '../components/Menu.vue'
 import Logo from "../components/Logo.vue";
 </script>
@@ -8,6 +8,6 @@ import Logo from "../components/Logo.vue";
   <div class="flex flex-col">
     <Logo />
     <Menu/>
-    <LinkInput />
+    <UserLinkInput />
   </div>
 </template>

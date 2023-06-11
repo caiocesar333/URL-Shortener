@@ -27,7 +27,7 @@ const routes = [
     component: TopLinks
   },
   {
-    path: '/HomeLogged',
+    path: '/HomeLogged/:userName',
     component: HomeLoggedVue
   },
 ];

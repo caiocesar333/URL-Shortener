@@ -108,7 +108,6 @@ const onClickRedirectTo = () => {
 };
 
 async function handleLogin() {
-  
   const response = await fetch("http://localhost:8001/user/login", {
     method: "POST",
     headers: {
@@ -121,7 +120,9 @@ async function handleLogin() {
   });
   const data = await response.json();
   if (response.ok) {
-    router.push("/HomeLogged");
+    router.push({
+      path: `/HomeLogged/${userName.value}`,
+    });
     console.log(data);
   } else {
     errorMessage.value = data.error;

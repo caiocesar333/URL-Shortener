@@ -68,7 +68,7 @@ async function handleUserSession(req, res) {
             }
           );
 
-        return res.json({ link: newURL.redirectURL });
+        return res.json( newURL );
     } catch (error) {
         return res.status(400).json({ error: "An error occurred" });
     }
