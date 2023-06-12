@@ -1,30 +1,46 @@
 <template>
-  <div class="mt-5 bg-slate-800 rounded-3xl flex items-center justify-between px-6">
-    <LinkIcon/>
+  <div
+    class="mt-5 bg-slate-800 rounded-3xl flex items-center justify-between px-6"
+  >
+    <LinkIcon />
     <input
       v-model="inputUrl"
       class="bg-transparent w-96 h-10 outline-none"
       placeholder="Example: http://super-long-link.com/shorten-it-pls"
     />
     <ShortenNowButton @click="shortenUrl" />
-    <a :href="getShortLinkUrl()" target="_blank" class="hover:cursor-pointer" v-if="shortId">Short Link: {{ shortId }}</a> <!-- Display the shortId if available -->
+    <div class="flex gap-1 flex-col" >
+      <p :href="getShortLinkUrl()"
+      target="_blank"
+      class="hover:cursor-pointer"
+      v-if="shortId">Short Link:</p>
+      <a
+        :href="getShortLinkUrl()"
+        target="_blank"
+        class="hover:cursor-pointer"
+        v-if="shortId"
+      >
+        {{ shortId }}</a
+      >
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import axios from 'axios'
-import ShortenNowButton from './ShortenNowButton.vue';
-import LinkIcon from './LinkIcon.vue';
+import { ref } from "vue";
+import axios from "axios";
+import ShortenNowButton from "./ShortenNowButton.vue";
+import LinkIcon from "./LinkIcon.vue";
 
-const inputUrl = ref('');
-const shortId = ref('');
+const inputUrl = ref("");
+const shortId = ref("");
 
 async function shortenUrl() {
   try {
-    const response = await axios.post('http://localhost:8001/url', { url: inputUrl.value });
-    shortId.value = response.data.shortID;
-    console.log(shortId.value); // You can use the shortLink in your application as needed
+    const response = await axios.post("http://localhost:8001/url", {
+      url: inputUrl.value,
+    });
+    shortId.value = response.data.shortId;
   } catch (error) {
     console.error(error);
   }
