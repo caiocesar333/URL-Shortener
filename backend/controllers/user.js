@@ -60,7 +60,6 @@ async function handleUserSession(req, res) {
 
     user.storedLinks.push({ link: body.url, short: shortID });
     await user.save();
-
     return res.json(newURL);
   } catch (error) {
     return res.status(400).json({ error: "An error occurred" });
