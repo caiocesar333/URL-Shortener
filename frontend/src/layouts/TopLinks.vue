@@ -1,13 +1,11 @@
 <template>
   <div class="flex flex-col">
-    <h1 class="font-bold text-7xl text-blue-600 mb-28">Top 100 Links!</h1>
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+    <h1 class="font-bold text-5xl text-blue-600 mb-8">Top 100 Links!</h1>
+    <div class="overflow-x-auto">
+      <div class="py-2">
         <div class="overflow-hidden">
-          <table class="min-w-full text-center text-sm font-light bg-zinc-900">
-            <thead
-              class="border rounded-xl bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900"
-            >
+          <table class="min-w-full text-center text-sm font-light bg-gray-800 text-white rounded-xl">
+            <thead class="border-b bg-gray-900 font-medium">
               <tr>
                 <th scope="col" class="px-6 py-4">#</th>
                 <th scope="col" class="px-6 py-4">Short Link</th>
@@ -16,26 +14,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(url, index) in urls"
-                :key="url._id"
-                class="border-b dark:border-neutral-500"
-              >
-                <td class="whitespace-nowrap px-6 py-4 font-medium">
-                  {{ index + 1 }}
-                </td>
+              <tr v-for="(url, index) in urls" :key="url._id" class="border-b">
+                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ index + 1 }}</td>
                 <td class="whitespace-nowrap px-6 py-4">{{ url.shortId }}</td>
                 <td class="px-6 py-4">
-                  <div class="overflow-x-auto max-w-xs">
-                    <span
-                      class="whitespace-nowrap overflow-hidden overflow-ellipsis"
-                      >{{ url.redirectURL }}</span
-                    >
+                  <div class="max-w-lg break-words">
+                    <span class="whitespace-pre-line">{{ url.redirectURL }}</span>
                   </div>
                 </td>
-                <td class="whitespace-nowrap px-6 py-4">
-                  {{ url.visitHistory.length }}
-                </td>
+                <td class="whitespace-nowrap px-6 py-4">{{ url.visitHistory.length }}</td>
               </tr>
             </tbody>
           </table>
