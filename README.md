@@ -133,8 +133,6 @@ This project is a challenge and is not licensed - see the
 1. Code refactoring to make it cleaner.
 2. Handling login exceptions: An unregistered user would be redirected to the login page if they accessed a logged-in page without an active session. A registered user would be redirected to the logged-in page when accessing an anonymous page with an active session.
 3. Registered users would be able to see the shortened links in their history, along with the original links.
-4. For the frontend, implement a toggle button capable of expanding and shortening the original links.
-5. Logout functionality.
-6. Improved styling for better visual appeal.
+4. Logout functionality.
 
 
