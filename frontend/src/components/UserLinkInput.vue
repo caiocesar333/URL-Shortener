@@ -9,13 +9,24 @@
       placeholder="Example: http://super-long-link.com/shorten-it-pls"
     />
     <ShortenNowButton @click="shortenUrl" />
-    <a
-      :href="getShortLinkUrl()"
-      target="_blank"
-      class="hover:cursor-pointer"
-      v-if="shortId"
-      >Short Link: {{ shortId }}</a
-    >
+    <div class="flex gap-1 flex-col">
+      <p
+        :href="getShortLinkUrl()"
+        target="_blank"
+        class="hover:cursor-pointer"
+        v-if="shortId"
+      >
+        Short Link:
+      </p>
+      <a
+        :href="getShortLinkUrl()"
+        target="_blank"
+        class="hover:cursor-pointer"
+        v-if="shortId"
+      >
+        {{ shortId }}</a
+      >
+    </div>
     <!-- Display the shortId if available -->
   </div>
 </template>
@@ -41,7 +52,7 @@ async function shortenUrl() {
     console.log(response.data);
   } catch (error) {
     console.error(error);
-  } 
+  }
 }
 
 function getShortLinkUrl() {

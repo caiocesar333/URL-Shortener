@@ -10,28 +10,31 @@ async function handleCreateNewUser(req, res) {
     return res.status(400).json({ error: "Password is required" });
 
   const existingUser = await User.findOne({ userName: body.userName });
-  if (existingUser) {
+  if (existingUser)
     return res.status(400).json({ error: "Username already registered" });
-  }
+
   await User.create({
     userName: body.userName,
     password: body.password,
   });
 
-  return res.json({ Enter: body.userName });
+  return res.json({ User: body.userName });
 }
 
 async function handleLoginUser(req, res) {
-  const body = req.body;
+  const { userName, password } = req.body;
   try {
-    const check = await User.findOne({ userName: body.userName });
-    if (check) {
-      if (check.password === req.body.password) {
-        check.session = true;
-        await check.save();
-        return res.json({ message: "User logged in successfully" });
-      } else return res.status(400).json(`Wrong password`);
-    } else return res.status(400).json(`User does not exist`);
+    const user = await User.findOne({ userName });
+    if (!user) {
+      return res.status(400).json({ error: "User does not exist" });
+    }
+    if (user.password !== password) {
+      return res.status(400).json({ error: "Wrong password" });
+    }
+
+    user.session = true;
+    await user.save();
+    return res.json({ message: "User logged in successfully" });
   } catch (error) {
     return res.status(400).json({ error: "An error occurred" });
   }
@@ -44,13 +47,10 @@ async function handleUserSession(req, res) {
   try {
     const user = await User.findOne({ userName: body.userName });
     console.log(user);
-    if (!user) {
-      return res.status(400).json({ error: "User not found" });
-    }
-
-    if (!user.session) {
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session)
       return res.status(401).json({ error: "User not logged in" });
-    }
+
     const newURL = await URL.create({
       shortId: shortID,
       redirectURL: body.url,
@@ -58,16 +58,8 @@ async function handleUserSession(req, res) {
       user: user.userName,
     });
 
-    await User.findOneAndUpdate(
-      { userName: body.userName },
-      {
-        $push: {
-          storedLinks: {
-            link: body.url,
-          },
-        },
-      }
-    );
+    user.storedLinks.push({ link: body.url });
+    await user.save();
 
     return res.json(newURL);
   } catch (error) {
@@ -79,12 +71,9 @@ async function handleDeleteUserLink(req, res) {
   const body = req.body;
   try {
     const user = await User.findOne({ userName: body.userName });
-    if (!user) {
-      return res.status(400).json({ error: "User not found" });
-    }
-    if (!user.session) {
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session)
       return res.status(401).json({ error: "User not logged in" });
-    }
 
     await User.findOneAndUpdate(
       { userName: body.userName },
@@ -108,13 +97,10 @@ async function handleGetUserLinks(req, res) {
   try {
     const user = await User.findOne({ userName: body.userName });
     console.log(user.storedLinks);
-    if (!user) {
-      return res.status(400).json({ error: "User not found" });
-    }
+    if (!user) return res.status(400).json({ error: "User not found" });
 
-    if (!user.session) {
+    if (!user.session)
       return res.status(401).json({ error: "User not logged in" });
-    }
 
     return res.json(user.storedLinks);
   } catch (error) {
