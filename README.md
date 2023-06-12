@@ -53,6 +53,10 @@ npm install
 npm start
 ```
 
+```
+Note: The backend PORT is set to 8001 and can be changed in backend/index.js. The MongoDB connection is set to my test account. For a different MongoDB, change the connection string in backend/connect.js.
+```
+
 #### For Frontend:
 
 1. Navigate to the `frontend` directory.
@@ -73,9 +77,6 @@ npm install
 npm run dev
 ```
 
-```
-Note: The backend PORT is set to 8001 and can be changed in backend/index.js. The MongoDB connection is set to my test account. For a different MongoDB, change the connection string in backend/connect.js.
-```
 
 ## ⚙️ Running the Tests
 
