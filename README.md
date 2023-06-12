@@ -5,9 +5,7 @@ Deadline: 5 days.
 
 ## Software Description
 
-```
 A URL shortener involves designing and implementing a system that can effectively shorten long URLs and provide a seamless redirection mechanism. This project evaluates user interface development, backend development, database management, analytics and tracking, error handling and security, testing, and deployment, among other aspects.
-```
 
 ## 🚀 Getting Started
 
