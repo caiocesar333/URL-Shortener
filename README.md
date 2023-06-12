@@ -55,7 +55,7 @@ To run the tests for this project, follow the steps below:
 
 The backend tests can be run by following these steps:
 
-1. Open your terminal and navigate to the root directory of the project.
+1. Open your terminal and navigate to the `backend` directory of the project.
 2. Run the command `npm test` to execute the backend tests.
 
 This should run the backend tests for GetSalesController and
@@ -65,7 +65,7 @@ CreateSaleController
 
 The frontend tests can be run by following these steps:
 
-1. Open your terminal and navigate to the `frontend/react-ts` directory.
+1. Open your terminal and navigate to the `frontend` directory.
 2. Run the command `npm test` to execute the frontend tests.
 
 This should run the frontend tests for ErrorComponent and TransactionsTable
