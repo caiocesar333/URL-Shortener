@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema(
         storedLinks: [{
             link: {
                 type: String
+            },
+            short: {
+                type: String
             }
         }]
     }

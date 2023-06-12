@@ -8,7 +8,8 @@
             <thead class="border-b bg-gray-900 font-medium">
               <tr>
                 <th scope="col" class="px-6 py-4">#</th>
-                <th scope="col" class="px-6 py-4">Link</th>
+                <th scope="col" class="px-6 py-4">Short Link</th>
+                <th scope="col" class="px-6 py-4">Original Link</th>
                 <th scope="col" class="px-6 py-4">Actions</th>
               </tr>
             </thead>
@@ -17,12 +18,16 @@
                 <td class="whitespace-nowrap px-6 py-4 font-medium">{{ index + 1 }}</td>
                 <td class="px-6 py-4">
                   <div class="max-w-lg break-words">
+                    <span class="whitespace-pre-line">{{ url.short }}</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="max-w-lg break-words">
                     <span class="whitespace-pre-line">{{ url.link }}</span>
-                    >
                   </div>
                 </td>
                 <td class="whitespace-nowrap px-6 py-4 font-medium">
-                  <DeleteIcon @click="onClickDelete(url.link)" />
+                  <DeleteIcon @click="onClickDelete(url.short)" />
                 </td>
               </tr>
             </tbody>
@@ -43,7 +48,8 @@ const route = useRoute();
 
 interface Url {
   _id: string;
-  link: string;
+  link: string
+  short: string;
 }
 
 const urls = ref<Array<Url>>([]);

@@ -58,7 +58,7 @@ async function handleUserSession(req, res) {
       user: user.userName,
     });
 
-    user.storedLinks.push({ link: body.url });
+    user.storedLinks.push({ link: body.url, short: shortID });
     await user.save();
 
     return res.json(newURL);
