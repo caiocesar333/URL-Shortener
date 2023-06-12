@@ -47,7 +47,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
-import DeleteIcon from "../components/DeleteIcon.vue";
+import DeleteIcon from "../components/Icons/DeleteIcon.vue";
 
 const route = useRoute();
 
