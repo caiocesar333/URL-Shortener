@@ -1,6 +1,7 @@
-# URL Shorterner
+# URL Shorterner - ShortEN
 
-This project is a challenge answer requested by Speedio.
+This project is a challenge answer requested by Speedio made with Vue and NodeJs. 
+Deadline: 5 days.
 
 ## Software Description
 
@@ -27,7 +28,8 @@ Node
 ### 🔧 Installation
 
 Execute the cloning of the repository with _git -clone
-https://github.com/caiocesar333/desafio-programacao-fullstack-1.2.0_
+
+[URLshortener - ShortEN](https://github.com/caiocesar333/URL-Shortener)
 
 After cloning the repository, open the folder in VSCode
 
@@ -47,6 +49,12 @@ After cloning the repository, open the folder in VSCode
 
 3. _npm run dev_ to start development server
 
+```
+Note: Backend PORT is 8001 and can be changed in backend/index.js. 
+The mongodb connection is setted to my test account. For a diferent mongodb change the connection string at backend/connect.js
+
+```
+
 ## ⚙️ Running the tests
 
 To run the tests for this project, follow the steps below:
@@ -55,7 +63,7 @@ To run the tests for this project, follow the steps below:
 
 The backend tests can be run by following these steps:
 
-1. Open your terminal and navigate to the root directory of the project.
+1. Open your terminal and navigate to the `backend` directory of the project.
 2. Run the command `npm test` to execute the backend tests.
 
 This should run the backend tests for GetSalesController and
@@ -65,7 +73,7 @@ CreateSaleController
 
 The frontend tests can be run by following these steps:
 
-1. Open your terminal and navigate to the `frontend/react-ts` directory.
+1. Open your terminal and navigate to the `frontend` directory.
 2. Run the command `npm test` to execute the frontend tests.
 
 This should run the frontend tests for ErrorComponent and TransactionsTable
@@ -107,3 +115,23 @@ see the [tags on this repository](https://github.com/caiocesar333/project/tags).
 
 This project is a challenge and is not licensed - see the
 [LICENSE.md](https://github.com/caiocesar333/project/license) file for details.
+
+## 🛠️ Functionalities
+
+1. URL shortening service with the smallest possible size.
+2. Basic user registration (sign up/login) feature.
+3. Allow users to create URLs anonymously (without logging in).
+4. Registered users should be able to delete the URLs they created.
+5. Redirect to the original URL when the shortened URL is visited (e.g., localhost:8001/124asgjq -> www.google.com).
+6. Increment the visit count of a URL with each visit.
+7. Page with the top 100 most visited URLs sorted by total visits.
+
+
+
+### What could be improved if i had more time
+
+1. Code refactoring to make it cleaner.
+2. Handling login exceptions: An unregistered user would be redirected to the login page if they accessed a logged-in page without an active session. A registered user would be redirected to the logged-in page when accessing an anonymous page with an active session.
+4. Logout functionality.
+
+
