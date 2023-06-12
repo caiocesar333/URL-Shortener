@@ -15,7 +15,7 @@ router.post("/login", handleLoginUser);
 router.post("/links",handleUserSession )
 
 router.post("/yourLinks",handleGetUserLinks )
-router.delete("/links",handleDeleteUserLink )
+router.post("/links/delete",handleDeleteUserLink )
 
 
 module.exports = router;

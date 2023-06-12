@@ -11,6 +11,7 @@
               <tr>
                 <th scope="col" class="px-6 py-4">#</th>
                 <th scope="col" class="px-6 py-4">Original Link</th>
+                <th scope="col" class="px-6 py-4">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -30,6 +31,9 @@
                     >
                   </div>
                 </td>
+                <td class="whitespace-nowrap px-6 py-4 font-medium">
+                  <DeleteIcon @click="onClickDelete(url.link)" />
+                </td>
               </tr>
             </tbody>
           </table>
@@ -43,6 +47,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
+import DeleteIcon from "../components/DeleteIcon.vue";
 
 const route = useRoute();
 
@@ -59,11 +64,30 @@ async function fetchUrls() {
       userName: route.params.userName,
     });
     urls.value = response.data;
-    console.log(response.data)
+    console.log(response.data);
   } catch (error) {
     console.error(error);
   }
 }
+
+async function onClickDelete(urlId: string) {
+  try {
+    const response = await axios.post("http://localhost:8001/user/links/delete", {
+        userName: route.params.userName,
+        url: urlId
+    });
+
+    console.log(response)
+    
+    if (response.status === 200) {
+      console.log(urls)
+      window.location.reload();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 onMounted(() => {
   fetchUrls();
 });
