@@ -1,6 +1,7 @@
 # URL Shorterner - ShortEN
 
-This project is a challenge answer requested by Speedio.
+This project is a challenge answer requested by Speedio made with Vue and NodeJs. 
+Deadline: 5 days.
 
 ## Software Description
 
@@ -47,6 +48,12 @@ After cloning the repository, open the folder in VSCode
 2. _npm install_ to install dependencies
 
 3. _npm run dev_ to start development server
+
+```
+Note: Backend PORT is 8001 and can be changed in backend/index.js. 
+The mongodb connection is setted to my test account. For a diferent mongodb change the connection string at backend/connect.js
+
+```
 
 ## ⚙️ Running the tests
 
@@ -108,3 +115,26 @@ see the [tags on this repository](https://github.com/caiocesar333/project/tags).
 
 This project is a challenge and is not licensed - see the
 [LICENSE.md](https://github.com/caiocesar333/project/license) file for details.
+
+## 🛠️ Functionalities
+
+1. URL shortening service with the smallest possible size.
+2. Basic user registration (sign up/login) feature.
+3. Allow users to create URLs anonymously (without logging in).
+4. Registered users should be able to delete the URLs they created.
+5. Redirect to the original URL when the shortened URL is visited (e.g., localhost:8001/124asgjq -> www.google.com).
+6. Increment the visit count of a URL with each visit.
+7. Page with the top 100 most visited URLs sorted by total visits.
+
+
+
+### What could be improved if i had more time
+
+1. Code refactoring to make it cleaner.
+2. Handling login exceptions: An unregistered user would be redirected to the login page if they accessed a logged-in page without an active session. A registered user would be redirected to the logged-in page when accessing an anonymous page with an active session.
+3. Registered users would be able to see the shortened links in their history, along with the original links.
+4. For the frontend, implement a toggle button capable of expanding and shortening the original links.
+5. Logout functionality.
+6. Improved styling for better visual appeal.
+
+
