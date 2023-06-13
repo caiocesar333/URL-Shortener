@@ -116,7 +116,5 @@ This project is a challenge and is not licensed. See the [LICENSE.md](https://gi
 ### What could be improved if I had more time
 
 1. Code refactoring to make it cleaner.
-2. Handling login exceptions: An unregistered user would be redirected to the login page if they accessed a logged-in page without an active session. A registered user would be redirected to the logged-in page when accessing an anonymous page with an active session.
-3. Implementation of a toggle button in the frontend to expand and shrink the original links.
-4. Logout functionality.
-5. Unit and End-To-End tests
+2. Implementation of a toggle button in the frontend to expand and shrink the original links.
+3. Unit and End-To-End tests
