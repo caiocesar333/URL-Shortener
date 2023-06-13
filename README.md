@@ -77,31 +77,6 @@ npm install
 npm run dev
 ```
 
-
-## ⚙️ Running the Tests
-
-To run the tests for this project, follow the steps below:
-
-### 🔩 End-to-End Tests
-
-To run backend tests, follow these steps:
-
-1. Open your terminal and navigate to the `backend` directory of the project.
-2. Run the command `npm test` to execute the backend tests.
-
-This will run the backend tests for GetSalesController and CreateSaleController.
-
-### ⌨️ Coding Style Tests
-
-To run frontend tests, follow these steps:
-
-1. Open your terminal and navigate to the `frontend` directory.
-2. Run the command `npm test` to execute the frontend tests.
-
-This will run the frontend tests for ErrorComponent and TransactionsTable components.
-
-These tests are designed to check the code for any syntax errors and ensure that it conforms to the coding style standards used in this project. Running these tests before committing code changes is highly recommended.
-
 ## 🛠️ Built With
 
 Here are the tools used to create this project:
@@ -112,7 +87,6 @@ Here are the tools used to create this project:
 - [Express](https://expressjs.com/) - A popular web application framework for Node.js.
 - [MongoDB](https://www.mongodb.com/) - A cross-platform document-oriented NoSQL database.
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom user interfaces.
-- [Jest](https://jestjs.io/) - A JavaScript testing framework designed to ensure the correctness of any JavaScript codebase.
 
 ## 📌 Versioning
 
@@ -143,7 +117,6 @@ This project is a challenge and is not licensed. See the [LICENSE.md](https://gi
 
 1. Code refactoring to make it cleaner.
 2. Handling login exceptions: An unregistered user would be redirected to the login page if they accessed a logged-in page without an active session. A registered user would be redirected to the logged-in page when accessing an anonymous page with an active session.
-3. Registered users would be able to see the shortened links in their history along with the original links.
-4. Implement a toggle button in the frontend to expand and shorten the original links.
-5. Logout functionality.
-6. Improve styling and design.
+3. Implementation of a toggle button in the frontend to expand and shrink the original links.
+4. Logout functionality.
+5. Unit and End-To-End tests
