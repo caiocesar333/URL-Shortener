@@ -40,7 +40,7 @@ async function handleLoginUser(req, res) {
   }
 }
 
-async function handleUserSession(req, res) {
+async function handleUserCreateNewUrl(req, res) {
   const body = req.body;
   const shortID = shortid();
   console.log(body);
@@ -61,6 +61,20 @@ async function handleUserSession(req, res) {
     user.storedLinks.push({ link: body.url, short: shortID });
     await user.save();
     return res.json(newURL);
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+
+async function handleUserSession(req, res) {
+  const body = req.body;
+  console.log(body);
+  try {
+    const user = await User.findOne({ userName: body.userName });
+    console.log(user);
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session) return res.status(401).json({ error: "User not logged in" });
+    return res.status(200).json({ message: "User is logged in" });
   } catch (error) {
     return res.status(400).json({ error: "An error occurred" });
   }
@@ -110,7 +124,8 @@ async function handleGetUserLinks(req, res) {
 module.exports = {
   handleCreateNewUser,
   handleLoginUser,
-  handleUserSession,
+  handleUserCreateNewUrl,
   handleGetUserLinks,
   handleDeleteUserLink,
+  handleUserSession
 };
