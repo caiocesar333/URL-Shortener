@@ -282,19 +282,19 @@ async function handleUserLogOut(req, res) {
 
 6. User Delete a short Url.
 ```
-async function handleUserLogOut(req, res) {
-  const body = req.body;
-  console.log(body);
+async function onClickDelete(urlId: string) {
   try {
-    const user = await User.findOne({ userName: body.userName });
-    console.log(user);
-    if (!user) return res.status(400).json({ error: "User not found" });
-    if (!user.session) return res.status(401).json({ error: "User not logged in" });
-    user.session = false
-    await user.save()
-    return res.status(200).json({ message: "User logged out successfully" });
+    const response = await axios.post("http://localhost:8001/user/links/delete", {
+        userName: route.params.userName,
+        url: urlId
+    });
+    console.log(response)
+    if (response.status === 200) {
+      console.log(urls)
+      window.location.reload();
+    }
   } catch (error) {
-    return res.status(400).json({ error: "An error occurred" });
+    console.error(error);
   }
 }
 ```
