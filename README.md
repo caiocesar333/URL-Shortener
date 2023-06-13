@@ -2,6 +2,7 @@
 
 This project is a challenge answer requested by Speedio made with Vue and Node.js.
 Deadline: 5 days.
+Check [Functionalities](#functionalities) to see what was implemented
 
 ## Software Description
 
@@ -102,7 +103,7 @@ I use [SemVer](http://semver.org/) for versioning. For the available versions, s
 
 This project is a challenge and is not licensed. See the [LICENSE.md](https://github.com/caiocesar333/project/license) file for details.
 
-## 🛠️ Functionalities
+## <a id="functionalities"></a>🛠️ Functionalities
 
 1. URL shortening service with the smallest possible size.
 2. Basic user registration (sign up/login) feature.
