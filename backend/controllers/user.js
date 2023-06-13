@@ -80,6 +80,22 @@ async function handleUserSession(req, res) {
   }
 }
 
+async function handleUserLogOut(req, res) {
+  const body = req.body;
+  console.log(body);
+  try {
+    const user = await User.findOne({ userName: body.userName });
+    console.log(user);
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session) return res.status(401).json({ error: "User not logged in" });
+    user.session = false
+    await user.save()
+    return res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+
 async function handleDeleteUserLink(req, res) {
   const body = req.body;
   try {
@@ -127,5 +143,6 @@ module.exports = {
   handleUserCreateNewUrl,
   handleGetUserLinks,
   handleDeleteUserLink,
-  handleUserSession
+  handleUserSession,
+  handleUserLogOut
 };

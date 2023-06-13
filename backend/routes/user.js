@@ -5,7 +5,8 @@ const {
   handleUserCreateNewUrl,
   handleGetUserLinks,
   handleDeleteUserLink,
-  handleUserSession
+  handleUserSession,
+  handleUserLogOut
 } = require("../controllers/user");
 
 const router = express.Router();
@@ -16,6 +17,6 @@ router.post("/links",handleUserCreateNewUrl )
 router.post("/links/delete",handleDeleteUserLink )
 router.post("/sessionCheck", handleUserSession)
 router.post("/yourLinks",handleGetUserLinks )
-
+router.post("/logOut", handleUserLogOut)
 
 module.exports = router;
