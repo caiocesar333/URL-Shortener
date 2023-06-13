@@ -109,7 +109,7 @@ async function handleDeleteUserLink(req, res) {
       {
         $pull: {
           storedLinks: {
-            link: body.url,
+            short: body.url,
           },
         },
       }
