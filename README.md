@@ -107,15 +107,212 @@ This project is a challenge and is not licensed. See the [LICENSE.md](https://gi
 
 1. URL shortening service with the smallest possible size.
 2. Basic user registration (sign up/login) feature.
-3. Allow users to create URLs anonymously (without logging in).
-4. Registered users can view the shortened links in their history along with the original links.
-5. Registered users can delete the URLs they created.
-6. Redirect to the original URL when the shortened URL is visited (e.g., localhost:8001/124asgjq -> www.google.com).
-7. Increment the visit count of a URL with each visit.
-8. Page with the top 100 most visited URLs sorted by total visits.
+3. (Optional) User loggout.
+4. Allow users to create URLs anonymously (without logging in).
+5. Registered users can view the shortened links in their history along with the original links.
+6. Registered users can delete the URLs they created.
+7. Redirect to the original URL when the shortened URL is visited (e.g., localhost:8001/124asgjq -> www.google.com).
+8. Increment the visit count of a URL with each visit.
+9. Page with the top 100 most visited URLs sorted by total visits.
 
 ### What could be improved if I had more time
 
 1. Code refactoring to make it cleaner.
 2. Implementation of a toggle button in the frontend to expand and shrink the original links.
 3. Unit and End-To-End tests
+
+## <a id="maintenance"></a>🔨 Backend Maintenance 
+
+### Url controller 
+
+1. Get the first 100 Url's sorted by number of visits.
+```
+async function handleGetAllURLs(req, res) {
+  try {
+    const urls = await URL.find()
+      .sort({ "visitHistory.length": -1 })
+      .limit(100);
+    return res.json({ urls });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+2. Generate new short Url.
+```
+async function handleGenerateNewShortURL(req, res) {
+  const body = req.body;
+  if (!body.url) return res.status(400).json({ error: "url is required" });
+  const shortId = shortid();
+  try {
+    await URL.create({
+      shortId: shortId,
+      redirectURL: body.url,
+      visitHistory: [],
+    });
+    return res.json({ shortId });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+3. Get Url Details.
+```
+async function handleGetAnalytics(req, res) {
+  const shortId = req.params.shortId;
+  try {
+    const result = await URL.findOne({ shortId });
+    if (!result) return res.status(404).json({ error: "URL not found" });
+    return res.json({
+      totalClicks: result.visitHistory.length,
+      analytics: result.visitHistory,
+    });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+### User Controller
+
+1. Create a new User.
+```
+async function handleCreateNewUser(req, res) {
+  const body = req.body;
+  if (!body.userName)
+    return res.status(400).json({ error: "User Name is required" });
+  if (!body.password)
+    return res.status(400).json({ error: "Password is required" });
+  const existingUser = await User.findOne({ userName: body.userName });
+  if (existingUser)
+    return res.status(400).json({ error: "Username already registered" });
+  await User.create({
+    userName: body.userName,
+    password: body.password,
+  });
+  return res.json({ User: body.userName });
+}
+```
+
+2. User Login.
+```
+async function handleLoginUser(req, res) {
+  const { userName, password } = req.body;
+  try {
+    const user = await User.findOne({ userName });
+    if (!user) {
+      return res.status(400).json({ error: "User does not exist" });
+    }
+    if (user.password !== password) {
+      return res.status(400).json({ error: "Wrong password" });
+    }
+    user.session = true;
+    await user.save();
+    return res.json({ message: "User logged in successfully" });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+3. User Generate new short Url.
+```
+async function handleUserCreateNewUrl(req, res) {
+  const body = req.body;
+  const shortID = shortid();
+  console.log(body);
+  try {
+    const user = await User.findOne({ userName: body.userName });
+    console.log(user);
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session)
+      return res.status(401).json({ error: "User not logged in" });
+    const newURL = await URL.create({
+      shortId: shortID,
+      redirectURL: body.url,
+      visitHistory: [],
+      user: user.userName,
+    });
+    user.storedLinks.push({ link: body.url, short: shortID });
+    await user.save();
+    return res.json(newURL);
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+4. Check User session.
+```
+async function handleUserSession(req, res) {
+  const body = req.body;
+  console.log(body);
+  try {
+    const user = await User.findOne({ userName: body.userName });
+    console.log(user);
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session) return res.status(401).json({ error: "User not logged in" });
+    return res.status(200).json({ message: "User is logged in" });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+5. User LogOut.
+```
+async function handleUserLogOut(req, res) {
+  const body = req.body;
+  console.log(body);
+  try {
+    const user = await User.findOne({ userName: body.userName });
+    console.log(user);
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session) return res.status(401).json({ error: "User not logged in" });
+    user.session = false
+    await user.save()
+    return res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+6. User Delete a short Url.
+```
+async function handleUserLogOut(req, res) {
+  const body = req.body;
+  console.log(body);
+  try {
+    const user = await User.findOne({ userName: body.userName });
+    console.log(user);
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session) return res.status(401).json({ error: "User not logged in" });
+    user.session = false
+    await user.save()
+    return res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
+7. User Url's list.
+```
+async function handleGetUserLinks(req, res) {
+  const body = req.body;
+  try {
+    const user = await User.findOne({ userName: body.userName });
+    console.log(user.storedLinks);
+    if (!user) return res.status(400).json({ error: "User not found" });
+    if (!user.session)
+      return res.status(401).json({ error: "User not logged in" });
+    return res.json(user.storedLinks);
+  } catch (error) {
+    return res.status(400).json({ error: "An error occurred" });
+  }
+}
+```
+
