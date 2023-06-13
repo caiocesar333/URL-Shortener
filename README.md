@@ -2,7 +2,7 @@
 
 This project is a challenge answer requested by Speedio made with Vue and Node.js.
 Deadline: 5 days.
-Check [Functionalities](#functionalities) to see what was implemented
+Check [Functionalities](#functionalities) to see what was implemented or this short [Video](https://share.vidyard.com/watch/ZWbZrKRy66itERHapCBXoa?)
 
 ## Software Description
 
